@@ -1,4 +1,5 @@
 {
+  "zig.version": "zig",
   "zig.zls.enabled": "on",
   "zig.zls.enableBuildOnSave": true,
   "zig.zls.additionalOptions": {
