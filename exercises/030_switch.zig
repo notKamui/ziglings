@@ -40,12 +40,27 @@ pub fn main() void {
             9 => std.debug.print("I", .{}),
             10 => std.debug.print("J", .{}),
             // ... we don't need everything in between ...
+            11 => std.debug.print("K", .{}),
+            12 => std.debug.print("L", .{}),
+            13 => std.debug.print("M", .{}),
+            14 => std.debug.print("N", .{}),
+            15 => std.debug.print("O", .{}),
+            16 => std.debug.print("P", .{}),
+            17 => std.debug.print("Q", .{}),
+            18 => std.debug.print("R", .{}),
+            19 => std.debug.print("S", .{}),
+            20 => std.debug.print("T", .{}),
+            21 => std.debug.print("U", .{}),
+            22 => std.debug.print("V", .{}),
+            23 => std.debug.print("W", .{}),
+            24 => std.debug.print("X", .{}),
             25 => std.debug.print("Y", .{}),
             26 => std.debug.print("Z", .{}),
             // Switch statements must be "exhaustive" (there must be a
             // match for every possible value).  Please add an "else"
             // to this switch to print a question mark "?" when c is
             // not one of the existing matches.
+            else => std.debug.print("?", .{}),
         }
     }
 
