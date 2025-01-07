@@ -1,15 +1,14 @@
 const std = @import("std");
-const builtin = @import("builtin");
-const tests = @import("test/tests.zig");
-
 const Build = std.Build;
 const CompileStep = Build.CompileStep;
 const Step = Build.Step;
 const Child = std.process.Child;
-
 const assert = std.debug.assert;
 const join = std.fs.path.join;
 const print = std.debug.print;
+const builtin = @import("builtin");
+
+const tests = @import("test/tests.zig");
 
 // When changing this version, be sure to also update README.md in two places:
 //     1) Getting Started
@@ -192,6 +191,9 @@ pub fn build(b: *Build) !void {
 
         zigling_step.dependOn(&verify_step.step);
 
+        const check_step = b.step("check", "Check if the project compiles");
+        check_step.dependOn(zigling_step);
+
         return;
     }
 
@@ -219,6 +221,9 @@ pub fn build(b: *Build) !void {
         const verify_step = ZiglingStep.create(b, ex, work_path, .random);
         verify_step.step.dependOn(&header_step.step);
         zigling_step.dependOn(&verify_step.step);
+
+        const check_step = b.step("check", "Check if the project compiles");
+        check_step.dependOn(zigling_step);
         return;
     }
 
@@ -239,6 +244,9 @@ pub fn build(b: *Build) !void {
             prev_step = &verify_stepn.step;
         }
         ziglings_step.dependOn(prev_step);
+
+        const check_step = b.step("check", "Check if the project compiles");
+        check_step.dependOn(ziglings_step);
         return;
     }
 
@@ -258,6 +266,9 @@ pub fn build(b: *Build) !void {
 
     const test_step = b.step("test", "Run all the tests");
     test_step.dependOn(tests.addCliTests(b, &exercises));
+
+    const check_step = b.step("check", "Check if the project compiles");
+    check_step.dependOn(ziglings_step);
 }
 
 var use_color_escapes = false;
